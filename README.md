@@ -16,3 +16,9 @@ You'll also need to extract all icon files from your WoW MPQ's. Icons should the
 * `items`
 * `spells_abilities`
 * `tradeskills`
+
+Lastly, you will need character portraits. They should be sorted into the following folders under the `images` directory:
+* `portraits/wow-default`
+* `portraits/wow`
+* `portraits/wow-70`
+* `portraits/wow-80`
