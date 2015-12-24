@@ -10,13 +10,13 @@ class Armory extends CI_Controller {
         $this->load->model('Characters_model', 'Characters');
         $this->load->model('Armory_model', 'Armory');
         $this->load->model('World_model', 'World');
-        $this->data->characters = $this->Characters->getCharacters();
         $this->load->helper('url');
         $this->load->view('common/header');
     }
 
     public function index()
     {
+        $this->data->characters = $this->Characters->getCharacters();
         foreach($this->data->characters as $thisCharacter) {
              //echo ($thisCharacter->gender == 0 ? 'Male' : 'Female') . ' ';
              $thisCharacter->raceName = $this->Armory->getRaceNameByID($thisCharacter->race);
@@ -43,13 +43,14 @@ class Armory extends CI_Controller {
         $characterGuid = $this->Characters->getCharacterGuidByName($characterName);
         $this->data->characterDisplayData = $this->Characters->getCharacterDisplayData($characterGuid);
         $this->data->characterDisplayData->characterName = ucfirst($characterName);
-        $this->data->gear = $this->Characters->getGear($characterGuid);
-        $this->data->sumItemLevel = 0;
-        $this->data->itemCount = 0;
         $this->data->characterDisplayData->raceName = $this->Armory->getRaceNameByID($this->data->characterDisplayData->race);
         $this->data->characterDisplayData->className = $this->Armory->getClassNameByID($this->data->characterDisplayData->class);
         $this->data->characterDisplayData->characterIcon = 'images/portraits';
         $this->data->characterDisplayData->specIcon = 'images/spells_abilities';
+
+        $this->data->gear = $this->Characters->getGear($characterGuid);
+        $this->data->sumItemLevel = 0;
+        $this->data->itemCount = 0;
         //TODO pull all talents from character talents and count talent by tree
         //$specDetails = $this->armory->getTalentIconByClassSpec($thischaracter->class, $thisCharacter->spec);
         //$this->data->characterDisplayData->specIcon .= $specDetails->icon;
@@ -71,16 +72,20 @@ class Armory extends CI_Controller {
             $thisGear->displayOrder = $this->Armory->getSlotDisplayOrder($thisGear->slot);
 
         }
+        $this->load->view('armory/sidebar', $this->data->characterDisplayData);
         $this->load->view('armory/characterOverview', $this->data);
     }
 
     public function characterReputation($characterName) {
         $characterGuid = $this->Characters->getCharacterGuidByName($characterName);
-        $this->data->reputations = $this->Characters->getReputations($characterGuid);
         $this->data->characterDisplayData = $this->Characters->getCharacterDisplayData($characterGuid);
         $this->data->characterDisplayData->characterName = ucfirst($characterName);
         $this->data->characterDisplayData->raceName = $this->Armory->getRaceNameByID($this->data->characterDisplayData->race);
         $this->data->characterDisplayData->className = $this->Armory->getClassNameByID($this->data->characterDisplayData->class);
+        $this->data->characterDisplayData->characterIcon = 'images/portraits';
+        $this->data->characterDisplayData->specIcon = 'images/spells_abilities';
+
+        $this->data->reputations = $this->Characters->getReputations($characterGuid);
         foreach ($this->data->reputations as $thisReputation) {
             $thisReputation->name = $this->Armory->getFactionByID($thisReputation->faction);
             if ($thisReputation->standing > 42999) { //sons of hodir (faction 1119) for example.
@@ -136,15 +141,16 @@ class Armory extends CI_Controller {
         usort($this->data->reputations, function($a, $b) {
             return $b->standing - $a->standing;
         });
+        $this->load->view('armory/sidebar', $this->data->characterDisplayData);
         $this->load->view('armory/characterReputations', $this->data);
 
     }
 
     public function characterAchievements($characterName) {
-
+        $this->load->view('armory/sidebar', $this->data->characterDisplayData);
     }
 
     public function characterTalents($characterName) {
-
+        $this->load->view('armory/sidebar', $this->data->characterDisplayData);
     }
 }

@@ -1,14 +1,11 @@
-<div class="pull-right">
-    <h1><?php echo $characterDisplayData->characterName; ?></h1><br/>
-    <h2><?php echo $characterDisplayData->level . ' ' . $characterDisplayData->raceName . ' ' . $characterDisplayData->className; //TODO add spec ?></h2><br/>
-    <h3>Average Item Level: <?php echo round($sumItemLevel / $itemCount); ?></h3></div>
-<br/>
+
 <?php foreach($gear as $key => $thisGear) {
     $indexed_values[$thisGear->displayOrder] = $key;
 } ?>
-
 <div class="row">
-    <div class="col-md-3"><?php $this->load->view('armory/sidebar', $characterDisplayData); ?></div>
+    <div class="col-md-3">
+        <!-- more content goes here? -->
+    </div>
     <div class="col-md-1">
         <?php
         for($displaySlot = 1; $displaySlot <= 8; $displaySlot++) {
@@ -62,4 +59,8 @@
             ?>
         </div>
     </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+    <h3>Average Item Level: <?php echo round($sumItemLevel / $itemCount); ?></h3></div>
 </div>

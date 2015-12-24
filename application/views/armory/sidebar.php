@@ -1,10 +1,24 @@
-<ul>
-    <h2><a href="<?php echo site_url(); ?>"?>Armory</a></h2>
-    <li><a href="<?php echo site_url(); ?>/armory/characterOverview/<?php echo $characterName; ?>">Overview</a></li>
-    <li><a href="<?php echo site_url(); ?>/armory/characterReputation/<?php echo $characterName; ?>">Reputation</a></li>
-    <li><a href="<?php echo site_url(); ?>/armory/characterTalents/<?php echo $characterName; ?>">Talents and Glyphs</a></li>
-    <li><a href="<?php echo site_url(); ?>/armory/characterAchievements/<?php echo $characterName; ?>">Achievements</a></li>
-
-    <li>Honor</li>
-    <p>The active link should have an active class.</p>
-</ul>
+<div class="row">
+    <div class="col-md-3"><ul>
+            <h2><a href="<?php echo site_url(); ?>"?>Armory</a></h2>
+            <li>Global Nav Goes Here</li>
+            <!-- TODO move this into a global header & include separately -->
+        </ul></div>
+    <div class="col-md-6" style="text-align:center;">
+        <h1><?php echo $characterName; ?></h1>
+        <h2><?php echo $level . ' ' . $raceName . ' ' . $className; //TODO add spec ?></h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3" role="navigation">
+        <nav>
+            <ul class="nav nav-tabs nav-justified">
+                <li role="presentation"> <!-- class="active" for active tab --><a href="<?php echo site_url(); ?>/armory/characterOverview/<?php echo $characterName; ?>">Overview</a></li>
+                <li role="presentation"><a href="<?php echo site_url(); ?>/armory/characterReputation/<?php echo $characterName; ?>">Reputation</a></li>
+                <li role="presentation" class="disabled"><a href="<?php echo site_url(); ?>/armory/characterTalents/<?php echo $characterName; ?>">Talents</a></li>
+                <li role="presentation" class="disabled"><a href="<?php echo site_url(); ?>/armory/characterAchievements/<?php echo $characterName; ?>">Achievements</a></li>
+                <li role="presentation" class="disabled"><a href="<?php echo site_url(); ?>/armory/characterHonor/<?php echo $characterName; ?>">Honor</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>
