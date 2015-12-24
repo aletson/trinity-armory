@@ -39,6 +39,7 @@ class Armory extends CI_Controller {
     }
 
     public function characterOverview($characterName) {
+        //TODO roll in dungeon progression & handle sockets/enchants
         $characterGuid = $this->Characters->getCharacterGuidByName($characterName);
         $this->data->characterDisplayData = $this->Characters->getCharacterDisplayData($characterGuid);
         $this->data->characterDisplayData->characterName = ucfirst($characterName);
