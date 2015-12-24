@@ -47,7 +47,6 @@ class Armory extends CI_Controller {
         $this->data->characterDisplayData->className = $this->Armory->getClassNameByID($this->data->characterDisplayData->class);
         $this->data->characterDisplayData->characterIcon = 'images/portraits';
         $this->data->characterDisplayData->specIcon = 'images/spells_abilities';
-
         $this->data->gear = $this->Characters->getGear($characterGuid);
         $this->data->sumItemLevel = 0;
         $this->data->itemCount = 0;

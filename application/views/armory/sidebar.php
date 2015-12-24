@@ -2,7 +2,6 @@
     <div class="col-md-3"><ul>
             <h2><a href="<?php echo site_url(); ?>"?>Armory</a></h2>
             <li>Global Nav Goes Here</li>
-            <!-- TODO move this into a global header & include separately -->
         </ul></div>
     <div class="col-md-6" style="text-align:center;">
         <h1><?php echo $characterName; ?></h1>
@@ -22,3 +21,5 @@
         </nav>
     </div>
 </div>
+
+<!-- TODO kick out the character nav into its own view, then js ajax for content load -->
