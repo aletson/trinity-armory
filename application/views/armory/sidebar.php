@@ -12,7 +12,7 @@
     <div class="col-md-6 col-md-offset-3" role="navigation">
         <nav>
             <ul class="nav nav-tabs nav-justified">
-                <li role="presentation"> <!-- class="active" for active tab --><a href="<?php echo site_url(); ?>/armory/characterOverview/<?php echo $characterName; ?>">Overview</a></li>
+                <li role="presentation"> <!-- class="active" for active tab: CI uri_string() --><a href="<?php echo site_url(); ?>/armory/characterOverview/<?php echo $characterName; ?>">Overview</a></li>
                 <li role="presentation"><a href="<?php echo site_url(); ?>/armory/characterReputation/<?php echo $characterName; ?>">Reputation</a></li>
                 <li role="presentation" class="disabled"><a href="<?php echo site_url(); ?>/armory/characterTalents/<?php echo $characterName; ?>">Talents</a></li>
                 <li role="presentation" class="disabled"><a href="<?php echo site_url(); ?>/armory/characterAchievements/<?php echo $characterName; ?>">Achievements</a></li>
