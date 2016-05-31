@@ -150,6 +150,19 @@ class Armory extends CI_Controller {
     }
 
     public function characterTalents($characterName) {
+        $characterGuid = $this->Characters->getCharacterGuidByName($characterName);
+        $this->data->characterDisplayData = $this->Characters->getCharacterDisplayData($characterGuid);
+        $this->data->characterDisplayData->characterName = ucfirst($characterName);
+        $this->data->characterDisplayData->raceName = $this->Armory->getRaceNameByID($this->data->characterDisplayData->race);
+        $this->data->characterDisplayData->className = $this->Armory->getClassNameByID($this->data->characterDisplayData->class);
+        $this->data->characterDisplayData->characterIcon = 'images/portraits';
+        $this->data->characterDisplayData->specIcon = 'images/spells_abilities';
+        $this->data->specs = $this->Armory->getSpecs($this->data->characterDisplayData->class);
+        foreach($this->data->specs as $thisSpec) {
+            $this->data->talents[$thisSpec->id] = $this->Armory->getTalentsBySpecID($thisSpec->id); //has Row, Col positioning.
+        }
+        $this->data->characterTalents = $this->Characters->getCharacterTalents($characterGuid);
         $this->load->view('armory/sidebar', $this->data->characterDisplayData);
+        $this->load->view('armory/characterTalents', $this->data);
     }
 }

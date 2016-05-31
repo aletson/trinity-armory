@@ -62,4 +62,11 @@ class Characters_model extends CI_Model
             ->get()->row();
     }
 
+    public function getCharacterTalents($characterGuid) {
+        return $this->db->select('spell, talentGroup')
+            ->from('character_talent')
+            ->where('guid', $characterGuid)
+            ->get()->result();
+    }
+
 }
