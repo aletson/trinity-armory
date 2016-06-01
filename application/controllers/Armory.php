@@ -11,7 +11,8 @@ class Armory extends CI_Controller {
         $this->load->model('Armory_model', 'Armory');
         $this->load->model('World_model', 'World');
         $this->load->helper('url');
-        $this->load->view('common/header');
+        $this->data->action = $this->router->method;
+        $this->load->view('common/header', $this->data);
     }
 
     public function index()
@@ -127,7 +128,6 @@ class Armory extends CI_Controller {
                 $thisReputation->calcStanding = $thisReputation->standing - 21000;
                 $thisReputation->maxStanding = 21000;
             } else {
-                echo $thisReputation->name . $thisReputation->standing;
                 $thisReputation->standingName = 'Exalted';
                 $thisReputation->barClass = 'info';
                 $thisReputation->calcStanding = $thisReputation->standing - 42000;
@@ -161,7 +161,7 @@ class Armory extends CI_Controller {
         foreach($this->data->specs as $thisSpec) {
             $this->data->talents[$thisSpec->id] = $this->Armory->getTalentsBySpecID($thisSpec->id); //has Row, Col positioning.
         }
-        $this->data->characterTalents = $this->Characters->getCharacterTalents($characterGuid);
+        $this->data->characterTalents = $this->Characters->getCharacterTalents($characterGuid); //This does not return all ranks, just highest rank learned by spell ID. Must match spellID against talents[$spec]->Rank_1, etc.
         $this->load->view('armory/sidebar', $this->data->characterDisplayData);
         $this->load->view('armory/characterTalents', $this->data);
     }
